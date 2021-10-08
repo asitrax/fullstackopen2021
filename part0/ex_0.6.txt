@@ -1,0 +1,28 @@
+note over browser:
+page loads as per previous sequence diagram (ex_0.5)
+end note
+
+note over browser:
+user types something in the text input (optional) and presses submit button
+end note
+
+note over browser:
+form.onsubmit defined handler (see ex_0.5) gets executed: 
+- the new note is added to the page "notes" variable 
+- the text input is set to blank
+- the HTML showing the list of notes is updated via JS with "redrawNotes"
+- the new note is sent to the server via POST (new note will be in req.body in JSON format)
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over server:
+server reads json data from request body
+server stores a new note
+end note
+
+server-->browser: HTTP code 201 (created) with response body in JSON format {"message":"note created"}
+
+note over browser:
+browser prints to console the response body
+end note

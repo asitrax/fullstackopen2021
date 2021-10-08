@@ -1,0 +1,23 @@
+note over browser:
+page loads as per previous sequence diagram (let's call this "Seq 0")
+end note
+
+note over browser:
+user types something in the text input (optional) and presses submit button
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+note over server:
+server reads form data from request body
+server stores a new note
+end note
+
+server-->browser: HTTP code 302 (redirect) with header "location: /exampleapp/notes"
+
+note over browser:
+browser requests (GET) the resource at the URL stated in the location header of the previous response
+so the page loads as happened in "Seq 0"
+the new note will be included in data.json and displayed as <li>
+end note
+
