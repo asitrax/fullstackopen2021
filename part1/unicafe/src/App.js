@@ -15,12 +15,18 @@ const StatisticLine = (props) => {
 }
 
 const Statistics = (props) => {
+  const allFeedbacks = props.good + props.neutral + props.bad
+  const average = allFeedbacks > 0 ? (props.good - props.bad) / allFeedbacks : 0
+  const positivePerc = allFeedbacks > 0 ? props.good / allFeedbacks : 0
 
   return(
     <div>
-      <StatisticLine text="good" value ={props.good} />
-      <StatisticLine text="neutral" value ={props.neutral} />
-      <StatisticLine text="bad" value ={props.bad} />
+      <StatisticLine text="good" value = {props.good} />
+      <StatisticLine text="neutral" value = {props.neutral} />
+      <StatisticLine text="bad" value = {props.bad} />
+      <StatisticLine text="all" value = {allFeedbacks} />
+      <StatisticLine text="average" value = {average} />
+      <StatisticLine text="positive" value = {`${positivePerc * 100} %`} />
     </div>
   )
 }
