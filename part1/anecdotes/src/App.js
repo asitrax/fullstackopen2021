@@ -28,16 +28,25 @@ const App = () => {
     setVotes(votesCopy);
   }
 
-  const votesMessage = `has ${votes[selected]} `.concat(votes[selected] === 1? 'vote': 'votes') 
+
+  const votesMessage = numberOfVotes => `has ${votes[numberOfVotes]} `.concat(votes[numberOfVotes] === 1? 'vote': 'votes')
+  // not the best performances but it's way more readable than a custom function
+  const mostVoted = votes.indexOf(Math.max(...votes))
 
   return (
     <>
+    <h1>Anectode of the day</h1>
     <div>
       {anecdotes[selected]}
     </div>
-    <div>{votesMessage}</div>
+    <div>{votesMessage(selected)}</div>
     <Button text='vote' onClick={() => updateVotes(selected)} />
     <Button text='next anecdote' onClick={() => setSelected(Math.floor(Math.random()*anecdotes.length))} />
+    <h1>Anectode with most votes</h1>
+    <div>
+      {anecdotes[mostVoted]}
+    </div>
+    <div>{votesMessage(mostVoted)}</div>
     </>
   )
 }
