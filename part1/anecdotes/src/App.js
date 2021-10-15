@@ -20,12 +20,23 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
+
+  const updateVotes = anecdoteToIncrement => {
+    const votesCopy = [...votes];
+    votesCopy[anecdoteToIncrement] += 1;
+    setVotes(votesCopy);
+  }
+
+  const votesMessage = `has ${votes[selected]} `.concat(votes[selected] === 1? 'vote': 'votes') 
 
   return (
     <>
     <div>
       {anecdotes[selected]}
     </div>
+    <div>{votesMessage}</div>
+    <Button text='vote' onClick={() => updateVotes(selected)} />
     <Button text='next anecdote' onClick={() => setSelected(Math.floor(Math.random()*anecdotes.length))} />
     </>
   )
